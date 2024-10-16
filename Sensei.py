@@ -42,11 +42,14 @@ dfs = dfs.sample(frac=1)
 
 wrong = pd.DataFrame(columns=dfs.columns)
 
-current = 0
+current = 1
 print('\n')
 while(len(dfs)!=0):
     for (row,rowSeries) in dfs.iterrows():
-        input(f'{rowSeries[0]} \t\t({current}/{end-start+1})')
+        if current > end-start+1:
+            input(f'{rowSeries[0]}')
+        else:
+            input(f'{rowSeries[0]} \t\t({current}/{end-start+1})')
         print(f'{rowSeries[1]}')
         gotit = input('Correct?: ')
         print('\n')
@@ -55,6 +58,8 @@ while(len(dfs)!=0):
         else:
             if row not in wrong.index:
                 wrong.loc[row,:] = rowSeries
+        current += 1
+        
 
 
 
@@ -90,7 +95,7 @@ L2 = [
     'Thank you for using Sensei CLI\n',
     'Based on "The Kodansha Kanji Learner\'s Course" by Andrew Scott Conning, 2013\n\n',
     'Created by Sheikh Bilal Ahmad\n',
-    'Date: 15-06-2024'
+    'Date: 16-10-2024'
 ]
 
 
@@ -132,6 +137,3 @@ with open(JSON_DB,'w') as fi:
 
 
 print('\n\n~~~THE END~~~')
-
-time.sleep(5)
-
